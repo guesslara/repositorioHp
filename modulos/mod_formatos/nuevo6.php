@@ -1,0 +1,7 @@
+<?php
+$idUsuario="1";
+$idLote="6";
+$idProyecto="1";
+$noFormato="IQF0750308";
+$nombre="IQF0750308_PARTES IRREPARABLES_REV.01_0";
+?>
