@@ -52,16 +52,4 @@
 			</script>
 			<?
 		break;
-	        case "insertardatos":
-                        $date=$_POST["fecha"];
-			$numparte=$_POST["nupart"];
-			$picture=$_POST["pic"];//llamando id de foto funcionEnsamble
-			$rutaEnServidor='imagen';// nombre del campo para almacenar fotos en tabla detalle_IQFO750306
-                        $rutaTemporal=$_FILES[$picture]['tmp_name']; 
-                        $foto=$rutaEnServidor;
-                        move_uploaded_file($rutaTemporal,$foto);
-			$coment=$_POST["coment"];
-			$firma=$_POST["firma"];
-			$objLote->insertardatos($date,$numparte,$foto,$coment,$firma);
-                break;
 	}

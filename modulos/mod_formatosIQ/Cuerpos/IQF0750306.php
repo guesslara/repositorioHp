@@ -14,13 +14,13 @@ $idL=$_POST['idLote'];
 include("../../mod_formatos/nuevo$idL.php");
 ?>
 	<link rel="stylesheet" type="text/css" href="../css/estilos.css">
-	<link rel="stylesheet" type="text/css" media="all" href="../js/calendar-green.css"  title="win2k-cold-1" />
-        <script type="text/javascript" src="../../../../../js/calendar.js"></script><!-- librería principal del calendario -->  
-        <script type="text/javascript" src="../../../../../js/calendar-es.js"></script><!-- librería para cargar el lenguaje deseado -->   
-        <script type="text/javascript" src="../../../../../js/calendar-setup.js"></script><!-- librería que declara la función Calendar.setup, que ayuda a generar un calendario en unas pocas líneas de código -->
-	<script type="text/javascript" src="../js/funcionesEnsamble.js" ></script>
+	<link rel="stylesheet" type="text/css" media="all" href="js/calendar-green.css"  title="win2k-cold-1" />
+        <script type="text/javascript" src="js/calendar.js"></script><!-- librería principal del calendario -->  
+        <script type="text/javascript" src="js/calendar-es.js"></script><!-- librería para cargar el lenguaje deseado -->   
+        <script type="text/javascript" src="js/calendar-setup.js"></script><!-- librería que declara la función Calendar.setup, que ayuda a generar un calendario en unas pocas líneas de código -->
+	<script type="text/javascript" src="js/funcionesEnsamble.js" ></script>
 	<script type="text/javascript" src="../../../clases/jquery-1.3.2.min.js"></script>
-      	</script>	
+      		
 		<form id="formdaños" enctype="multipart/form-data">
 	<div id="uno" style="width:100%; height:100%">
 
@@ -78,9 +78,12 @@ include("../../mod_formatos/nuevo$idL.php");
 		<tr>
 		   <td><input type ="text" name = "coment" id = "coment" size="80" style="width:630px;height:70px;"/></td>
 		 </tr>
-		<table border = "" cellpading "0" cellspacing = "0" style="margin: 5px 5px 5px 280px;">
+		<table border = "" cellpading "0" cellspacing = "0" style="margin: 5px 5px 5px 270px;">
 		<tr>
 		   <td colspan="2" align="center" style="background-color:#F3F781; font-size: 8pt; margin: 8px 5px 10px 0px;"><b>ELABOR&Oacute;:</b>
+<?
+                $nombre=$nomFormato."-1";
+?>
 		   <input type="button" value="GUARDAR"  onclick="valida()"  style="font-size: 7pt;"/> <input type="button" value="VER"  onclick="formatoPDF('<?=$nombre?>')" style="font-size: 7pt;"/></td>
 		</tr>
 		<tr>
@@ -88,9 +91,7 @@ include("../../mod_formatos/nuevo$idL.php");
 		</tr>
 		
 		</table
-<?
-                $nombre=$nomFormato."-1";
-?>
+
                 
 	</div>
 		</form>

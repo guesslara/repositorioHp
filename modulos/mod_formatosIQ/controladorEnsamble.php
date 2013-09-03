@@ -40,7 +40,7 @@
 			$datosArchivo="<?php".PHP_EOL."\$idUsuario=\"$idUsuario\";".PHP_EOL."\$idLote=\"$idLote\";".PHP_EOL."\$idProyecto=\"$idProyecto\";".PHP_EOL."\$noFormato=\"$noFormato\";".PHP_EOL."\$nombre=\"$nombre\";".PHP_EOL."?>";
 			fwrite($OFiel, $datosArchivo);
 			fclose($OFiel);
-			if($noFormato=="IQF0750301" || $noFormato=="IQF0750302" || $noFormato=="IQF0750305" || $noFormato=="IQF0750308" || $noFormato=="IQF0750309" || $noFormato=="IQF0750304" || $noFormato=="IQF0750307"){
+			if($noFormato=="IQF0750301" || $noFormato=="IQF0750302" || $noFormato=="IQF0750305" || $noFormato=="IQF0750308" || $noFormato=="IQF0750309" || $noFormato=="IQF0750304" || $noFormato=="IQF0750306" || $noFormato=="IQF0750307"){
 				$cab=1;
 			}else{
 				$cab=2;

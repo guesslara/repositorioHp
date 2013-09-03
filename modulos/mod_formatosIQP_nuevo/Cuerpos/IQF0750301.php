@@ -90,6 +90,30 @@ $tQ=0;
 $lisComm="SELECT * FROM CAT_commodity ";
 $exeLis=mysql_query($lisComm,conectarBd());
 $numLis=mysql_num_rows($exeLis);
+
+
+while($rrow=mysql_fetch_array($exeLis)){
+
+//while($rowComm=mysql_fetch_array($exeComm)){
+	
+	print($rrow['desc_eng']." ");
+
+	while($rowComm=mysql_fetch_array($exeComm)){
+
+		print($rowComm['desc_eng']."**".$rowComm['qty']."<br>");
+
+	
+		/*
+		if($rrow['desc_eng']==$rowComm['desc_eng']){
+		   
+		   
+		echo $rowComm['qty']."<br>";
+		
+		}*/
+
+	}
+}
+
 ?>
 <link rel="stylesheet" type="text/css" href="../css/estilos.css" />  
 <div id="cont" style="width:100%;height:100%;" >
@@ -199,21 +223,24 @@ $numLis=mysql_num_rows($exeLis);
 						<th>QTY</th>
 					</tr>
 <?
-					while($rowComm=mysql_fetch_array($exeComm)){
-						while($rrow=mysql_fetch_array($exeLis)){
+					while($rrow=mysql_fetch_array($exeLis)){
 ?>
-							<tr>
-								<td><?=strtoupper($rrow['desc_eng'])?></td>
+						<tr>
+							<td><?=strtoupper($rrow['desc_eng'])?></td>
 <?
-								if($rowComm['desc_eng']==$rrow['desc_eng']){
+							while($rowComm=mysql_fetch_array($exeComm)){
+							
+								if(($rrow['desc_eng']==$rowComm['desc_eng']) && ($rowComm['qty']!=0)){
 									?><td><?=$rowComm['qty']?></td><?
 								}else{
 									?><td>0</td><?
 								}
 ?>
-							</tr>
+							
 <?
-						}
+							}
+						echo"</tr>";
+						$rowComm="";						
 						$tQ+=$rowComm['qty'];
 					}
 ?>

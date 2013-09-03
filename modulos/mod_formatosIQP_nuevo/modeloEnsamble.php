@@ -106,29 +106,27 @@
 			}
 		}//fin function mostrarLotesProyecto
 		public function verFormatos($idLote,$idUsuario,$idProyecto,$numPo){
+			$datoE=0;
 			?>
 			<div style="height:20px;width:98%;background:#e1e1e1;color:#000; text-align:center;clear:both;font-size:14px;">Formatos para lote: <?=$idLote?> con Referencia: <?=$numPo?></div>
-			<div style="height:auto; width:98% background:#FFFFFF; color:#000; text-align:justify;clear;both;font-size:12px;padding:10px;">
+			<div style="height:auto; width:98% background:#FFF; color:#000; text-align:justify;clear;both;font-size:12px;padding:10px;">
 
 				<?
 				$formatos= array(
 					"IQF0750301_PARTES REPARADAS_REV.01_5",
 					"IQF0750302_REPORTE DE SALIDA DE MONITORES REPARADOS_REV.01_1",
-					"IQF0750305_FORMATO DE FACTURACION DE MONITORES REPARADOS_REV.01_0",
 					"IQF0750308_PARTES IRREPARABLES_REV.01_0",
 					"IQF0750309_GARANTIAS REPARADAS_REV.01_5",
 					"IQF0750303_INGRESO DE EQUIPO A ALMACEN DE PRODUCTO TERMINADO_Rev.00_2",
 					"IQF0750304_INVENTARIO DE MONITORES SCRAP_REV.01_0",
 					"IQF0750306_INFORME DE DAÑOS Y SUCESOS_REV.00_3",
-					"IQF0750307_CONTROL DE RECIBO COSMETICA_REV.01_4",
-					"IQF0750311_REACOND COSMETICO HP SCITEX_REV.00_6",
-  					"IQF0750316_FORMATO DE SALIDA HP SCITEX REV.00_7",
   					"IQF0750317_HOJA DE CAPTURA PARA PHOENIX_REV.00_4",
   					"IQF0750318_HP CHECK LIST FINAL_REV.00_8",
   					"IQF0750319_CODIGOS DE FALLAS REV.00_0",
   					"IQF0750320_REPORTE DE SALIDA DE MONITORES SCRAP PSG_REV.00_9",
-  					"IQF0750321_HOJA DE ASIGNACION HP PSG R&B_REV.00_4",
-  					"IQF0750322_CODIGOS DE REPARACION_REV.00_0");?>
+  					"IQF0750321_HOJA DE ASIGNACION HP PSG R/B_REV.00_4",
+  					"IQF0750322_CODIGOS DE REPARACION_REV.00_0");
+?>
 
 				<table class="tablaForma">
 					<?for($fo=0;$fo<count($formatos);$fo++){
@@ -137,33 +135,33 @@
 						$nameLink=$noFormato.$idLote;?>
 
 					<tr>
-						<td><a id="<?=$nameLink?>" href="#" onclick="formatoPDF('<?=$noFormato?>','<?=$idLote?>','<?=$idUsuario?>','<?=$idProyecto?>','<?=$formatos[$fo]?>')" title="Visualizar formato <?=$noFormato?>" class="stiloA"><?=strtoupper($formatos[$fo]);?></a></td>
+						<td><a id="<?=$nameLink?>" href="#" onclick="formatoPDF('<?=$noFormato?>','<?=$idLote?>','<?=$idUsuario?>','<?=$idProyecto?>','<?=$formatos[$fo]?>','<?=$datoE?>')" title="Visualizar formato <?=$noFormato?>" class="stiloA"><?=strtoupper($formatos[$fo]);?></a></td>
 					</tr>
 					<?}?>
 				</table>
 			</div>
 			<?
 		}
-		
-			  
-	        function insertardatos($date,$numparte,$foto,$coment,$firma){
-			$sql="INSERT INTO detalle_IQFO750306 (fecha,num_parte,imagen,comentarios,elaboro) VALUES ('".$date."', '".$numparte."', '".$foto."', '".$coment."','".$firma."')";
-                        $exeCon=mysql_query($sql,$this->conectarBd());
-			if(!$exeCon){
+		public function muestraTec($idLote,$idUsuario,$idProyecto,$noFormato,$nombre,$datoE){
+			$conTec="SELECT detalle_lotes.*, userdbcontroloperaciones.* FROM detalle_lotes INNER JOIN userdbcontroloperaciones ON userdbcontroloperaciones.ID= detalle_lotes.id_tecnico WHERE id_lote=$idLote group by (detalle_lotes.id_tecnico)";
+			$exeTec=mysql_query($conTec,$this->conectarBd());
+			$noTec=mysql_num_rows($exeTec);
+			if($noTec==0){
+				echo" NO SE ENCUENTRA NINGUN TECNICO";
+			}else{
 ?>
-                       <script type="text/javascript">
-			alert("Lo sentimos tu informacion no ha sido insertada");
-		       </script>       
-<?php
-                        }else{
+				<select id="tecnicos" nombre="tecnicos" onchange="cerrarVentana('divMensajeCaptura','transparenciaGeneral1');formatoPDF('<?=$noFormato?>','<?=$idLote?>','<?=$idUsuario?>','<?=$idProyecto?>','<?=$nombre?>',this.options[this.selectedIndex].value)">
+					<option value="0">Selecciona un t&eacute;cnico</option>
+<?
+					while($roT=mysql_fetch_array($exeTec)){
 ?>
-                       <script type="text/javascript">
-			alert("Informacion insertada correctamente");
-		       </script>       
+						<option value="<?=$roT['ID']?>"><?=$roT['nombre']." ".$roT['apaterno']?></option>
+<?
+					}
 ?>
-                       <a href="IQFO750306.php"></a><div id="foto_b_1"> <img src='<?=$foto?>'></div>	
-<?php
-                        
-		       }
-		}       
+				</select>
+<?
+			}
+
+		}
 	}

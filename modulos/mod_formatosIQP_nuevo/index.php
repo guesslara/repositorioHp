@@ -90,10 +90,10 @@ session_start();
 <div id="transparenciaGeneral1" class="transparenciaGeneral" style="display:none;">
 	<div id="divMensajeCaptura" class="ventanaDialogo">
 		<div id="barraTitulo1VentanaDialogoValidacion" class="barraTitulo1VentanaDialogoValidacion">Informaci&oacute;n<div id="btnCerrarVentanaDialogo"><a href="#" onclick="cerrarVentana('divMensajeCaptura','transparenciaGeneral1')" title="Cerrar Ventana"><img src="../../img/close.gif" border="0" /></a></div></div>
-		<div id="listadoEmpaqueValidacion" style="border:1px solid #CCC; margin:4px; font-size:10px;height:89%; overflow:auto;"></div>
+		<div id="listadoEmpaqueValidacion" style="border:1px solid #CCC; margin:4px; font-size:10px;height:89%; overflow:auto;text-align:center;"></div>
 	</div>
 </div>
-<div id="transparenciaOp" class="transparenciaGeneral" style="display:none;">
+<!--<div id="transparenciaOp" class="transparenciaGeneral" style="display:none;">
 	<div id="divAgrega" class="ventanaDialogoOp">
 		<div id="barraTitulo1Agrega" class="barraTitulo1VentanaDialogoValidacion">Agregar SENC<div id="btnCerrarVentanaDialogo"><a href="#" onclick="cerrarVentana('divAgrega','transparenciaOp')" title="Cerrar Ventana"><img src="../../img/close.gif" border="0" /></a></div></div>
 		<div id="formaAgrega" style="border:1px solid #CCC; margin:4px; font-size:10px;height:87%; overflow:auto;"></div>
@@ -113,7 +113,7 @@ session_start();
 	<div id="barraBotonesVentanaDialogo" align="center" style="display: none;">
 		<input type="button" name="agrega" id="agrega" value="Agrega" onclick="recupera()"><input type="button" name="cerrar" id="cerrar" value="Cerrar" onclick="cerrarVentana('ventanaDialogo1')">
 	</div>
-</div>
+</div>-->
 <?
 include ("../../includes/pie.php");
 ?>

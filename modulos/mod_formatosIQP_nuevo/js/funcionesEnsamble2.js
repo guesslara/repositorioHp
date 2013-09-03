@@ -61,16 +61,8 @@ function coloca(){
 function verFormatos(idLote,idProyectoSeleccionado,idUsuario,numPo){
 	ajaxApp("detalleEmpaque","controladorEnsamble.php","action=verFormatos&idLote="+idLote+"&idUsuario="+idUsuario+"&idProyectoSeleccionado="+idProyectoSeleccionado+"&numPo="+numPo,"POST"); 
 }
-function formatoPDF(noFormato,idLote,idUsuario,idProyectoSeleccionado,nombre,datoE){
-	//alert(idLote+"\n"+datoE);
-	if((noFormato=="IQF0750317" && datoE==0) || (noFormato=="IQF0750321" && datoE==0)){
-		$("#transparenciaGeneral1").show();
-		$("#divMensajeCaptura").show();
-		ajaxApp("listadoEmpaqueValidacion","controladorEnsamble.php","action=muestraTec&idLote="+idLote+"&idUsuario="+idUsuario+"&idProyectoSeleccionado="+idProyectoSeleccionado+"&noFormato="+noFormato+"&nombre="+nombre+"&datoE="+datoE,"POST"); 
-	
-	}else{
-		ajaxApp("detalleEmpaque","controladorEnsamble.php","action=formatoPDF&idLote="+idLote+"&idUsuario="+idUsuario+"&idProyectoSeleccionado="+idProyectoSeleccionado+"&noFormato="+noFormato+"&nombre="+nombre+"&datoE="+datoE,"POST"); 
-	}
+function formatoPDF(noFormato,idLote,idUsuario,idProyectoSeleccionado,nombre){
+	ajaxApp("detalleEmpaque","controladorEnsamble.php","action=formatoPDF&idLote="+idLote+"&idUsuario="+idUsuario+"&idProyectoSeleccionado="+idProyectoSeleccionado+"&noFormato="+noFormato+"&nombre="+nombre,"POST"); 
 }
 function add(noform){
 	$("#ant").show();
@@ -88,8 +80,7 @@ function att(noform){
 	var paginasT=$("#tp").val();
 	var limreg=$("#limreg").val();
 	nvolimite=limite-(limreg*2);
-	parametros="pagAct="+(pagAct-1)+"&intervalo="+(nvolimite)+"&totalpag="+paginasT+"&idLote="+idLote;
-	ajaxApp("cuerpo","Cuerpos/"+noform+".php",parametros,"POST");
+	ajaxApp("cuerpo","Cuerpos/"+noform+".php","pagAct="+(pagAct-1)+"&intervalo="+(nvolimite)+"&totalpag="+paginasT+"&idLote="+idLote,"POST");
 }
 function muestraTiempo(noFormato){
 	var pagAct=parseInt($("#pagAct").val());
@@ -102,12 +93,55 @@ function muestraTiempo(noFormato){
 	ajaxApp("cuerpo","Cuerpos/"+noFormato+"-1.php",parametros,"POST");
 }
 
-function insertform306(){
+function insertform(noform){
+	//alert("aqui esta");
 	var fecha=document.getElementById("fecha").value;
 	var numparte=document.getElementById("numpart").value;
 	var picture=document.getElementById("uploadedfile").value;
 	var comentarios=document.getElementById("coment").value;
 	var firma=document.getElementById("firma").value;
-	var parametros="action=insertar&fecha"+fecha+"&nuparte"+numparte+"&pic"+picture+"&coment"+comentarios+"&firma"+firma;
-	ajaxApp("detalleEmpaque","controladorEnsamble.php", parametros,"POST");
+	var parametros="action=insertardatos&fecha="+fecha+"&nuparte="+numparte+"&pic="+picture+"&coment="+comentarios+"&firma="+firma;
+//alert(parametros);
+	ajaxApp("uno","../controladorEnsamble.php",parametros,"POST");
 }
+function valida(){
+        var fech=document.getElementById("fecha").value;
+        var nombr=document.getElementById("nombre").value;
+        var intro=document.getElementById("intro").value;
+        var numparte=document.getElementById("numpart").value;
+        var fotito=document.getElementById("uploadedfile").value;
+	var comentar=document.getElementById("coment").value;
+	var fir=document.getElementById("firma").value;
+        var validando=true;
+        msj="";       
+        
+        if (fech==""){
+            msj="Ingresa la fecha en el  campo correspondiente";
+        }
+        if (nombr==""){
+            msj="Ingresa nombre del destinatario";
+        }
+        if (intro==""){
+	      msj="Ingresa la introducci&oacute;n en el campo correspondiente";
+        }
+        if (numparte==""){
+            msj="Ingresa el numero de parte en el espacio correspondiente";
+        }
+        if (fotito==""){
+            msj="Cargar foto de evidencia en el espacio correspondiente";
+        }
+        if (comentar==""){
+            msj="Escribir comentarios en el espacio correspondiente";
+        }
+	if (fir==""){
+            msj="Firma o nombre de quien elabora";
+        }
+	if(fech==""||nombr==""||intro==""||numparte==""||fotito==""||comentar==""||fir=="") {
+	  alert(msj);
+	  return;
+	}else{
+	  insertform();
+
+	}
+}
+    
