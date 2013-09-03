@@ -36,7 +36,7 @@ if($paginasT==0 && $intervalo==0){
 	if($noRegCOEm>$pag){
 		$paginasT=$noReg/$pag;
 		if(is_int($paginasT)){}else{$paginasT=intval($paginasT+1);}
-		//echo"$paginasT";
+		echo"$paginasT";
 		?>
 		<input type="hidden" id="pagAct" name="pagAct" value="<?=$pagAct;?>"/>
 		<input type="hidden" id="limite" name="limite" value="<?=$lim;?>"/>
