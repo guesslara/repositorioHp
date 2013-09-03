@@ -2,6 +2,7 @@
 $idUsuario="1";
 $idLote="7";
 $idProyecto="1";
-$noFormato="IQF0750302";
-$nombre="IQF0750302_REPORTE DE SALIDA DE MONITORES REPARADOS_REV.01_1";
+$noFormato="IQF0750317";
+$nombre="IQF0750317_HOJA DE CAPTURA PARA PHOENIX_REV.00_4";
+$datoE="3";
 ?>

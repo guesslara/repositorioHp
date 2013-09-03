@@ -33,11 +33,12 @@
 			$idProyecto=clean($_POST["idProyectoSeleccionado"]);
 			$noFormato=clean($_POST["noFormato"]);
 			$nombre=clean($_POST["nombre"]);
+			$datoE=clean($_POST["datoE"]);
 			if(fopen("../mod_formatos/nuevo$idLote.php","a")){
 				unlink("../mod_formatos/nuevo$idLote.php");
 			}
 			$OFiel=fopen("../mod_formatos/nuevo$idLote.php","a");
-			$datosArchivo="<?php".PHP_EOL."\$idUsuario=\"$idUsuario\";".PHP_EOL."\$idLote=\"$idLote\";".PHP_EOL."\$idProyecto=\"$idProyecto\";".PHP_EOL."\$noFormato=\"$noFormato\";".PHP_EOL."\$nombre=\"$nombre\";".PHP_EOL."?>";
+			$datosArchivo="<?php".PHP_EOL."\$idUsuario=\"$idUsuario\";".PHP_EOL."\$idLote=\"$idLote\";".PHP_EOL."\$idProyecto=\"$idProyecto\";".PHP_EOL."\$noFormato=\"$noFormato\";".PHP_EOL."\$nombre=\"$nombre\";".PHP_EOL."\$datoE=\"$datoE\";".PHP_EOL."?>";
 			fwrite($OFiel, $datosArchivo);
 			fclose($OFiel);
 			if($noFormato=="IQF0750301" || $noFormato=="IQF0750302" || $noFormato=="IQF0750305" || $noFormato=="IQF0750308" || $noFormato=="IQF0750309" || $noFormato=="IQF0750304" || $noFormato=="IQF0750307"){
@@ -51,5 +52,14 @@
 				_blank.location.href ="machoteCentrado.php?noFormato=<?=$noFormato;?>&idLote=<?=$idLote;?>&cab=<?=$cab;?>";
 			</script>
 			<?
+		break;
+		case "muestraTec":
+			$idLote=clean($_POST["idLote"]);
+			$idUsuario=clean($_POST["idUsuario"]);
+			$idProyecto=clean($_POST["idProyectoSeleccionado"]);
+			$noFormato=clean($_POST["noFormato"]);
+			$nombre=clean($_POST["nombre"]);
+			$datoE=clean($_POST["datoE"]);
+			$objLote->muestraTec($idLote,$idUsuario,$idProyecto,$noFormato,$nombre,$datoE);
 		break;
 	}

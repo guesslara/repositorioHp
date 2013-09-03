@@ -76,11 +76,11 @@ $cSEN="SELECT count( id_Senc ) AS sencs FROM detalle_lotes where id_lote='".$idL
 	and status='Empaque' and id_irre_wk='N/A' and TipoEntrada  like '%Garant%' ORDER BY (id_Senc)";
 $exeCS=mysql_query($cSEN,conectarBd());
 $rowCS=mysql_fetch_array($exeCS);
-$comm="SELECT count( detalle_lotes.id_commodity ) AS qty, detalle_lotes.id_commodity, CAT_commodity.desc_eng FROM detalle_lotes
+/*$comm="SELECT count( detalle_lotes.id_commodity ) AS qty, detalle_lotes.id_commodity, CAT_commodity.desc_eng FROM detalle_lotes
 	INNER JOIN CAT_commodity ON detalle_lotes.id_commodity = CAT_commodity.id_commodity WHERE detalle_lotes.id_lote='".$idLote."'
 	AND status='Empaque' and id_irre_wk='N/A' and TipoEntrada like '%Garant%' GROUP BY (detalle_lotes.id_commodity)";
 $exeComm=mysql_query($comm,conectarBd());
-$nuComm=mysql_num_rows($exeComm);
+$nuComm=mysql_num_rows($exeComm);*/
 $poPar="SELECT count(CAT_SENC.NoParte) as Total, CAT_SENC.NoParte FROM detalle_lotes
 	INNER JOIN CAT_SENC ON CAT_SENC.id_SENC= detalle_lotes.id_Senc WHERE detalle_lotes.id_lote='".$idLote."'
 	and status='Empaque' and id_irre_wk='N/A' and TipoEntrada like '%Garant%' GROUP BY(NoParte)";
@@ -199,22 +199,25 @@ $numLis=mysql_num_rows($exeLis);
 						<th>QTY</th>
 					</tr>
 <?
-					while($rowComm=mysql_fetch_array($exeComm)){
-						while($rrow=mysql_fetch_array($exeLis)){
-?>
-							<tr>
-								<td><?=strtoupper($rrow['desc_eng'])?></td>
-<?
-								if($rowComm['desc_eng']==$rrow['desc_eng']){
-									?><td><?=$rowComm['qty']?></td><?
-								}else{
-									?><td>0</td><?
-								}
-?>
-							</tr>
-<?
+					while($rrow=mysql_fetch_array($exeLis)){
+						?><tr>
+							<td><?=$rrow["desc_eng"];?></td><?
+						$comm="SELECT count( detalle_lotes.id_commodity ) AS qty, detalle_lotes.id_commodity, CAT_commodity.desc_eng FROM detalle_lotes
+						INNER JOIN CAT_commodity ON detalle_lotes.id_commodity = CAT_commodity.id_commodity 
+						WHERE detalle_lotes.id_lote='".$idLote."'	AND status='Empaque' and id_irre_wk='N/A' and TipoEntrada like '%Garant%' GROUP BY (detalle_lotes.id_commodity)";
+						$exeComm=mysql_query($comm,conectarBd());
+						$nuComm=mysql_num_rows($exeComm);
+						while($rowComm=mysql_fetch_array($exeComm)){
+							if($rrow['desc_eng']==$rowComm['desc_eng']){
+								$valor=$rowComm['qty'];
+								$tQ+=$valor;
+								break;
+							}else{
+								$valor=0;
+							}
 						}
-						$tQ+=$rowComm['qty'];
+						echo"<td>$valor</td>";
+						echo"</tr>";
 					}
 ?>
 					<tr class="uno">

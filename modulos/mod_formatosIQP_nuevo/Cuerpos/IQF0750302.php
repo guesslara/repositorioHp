@@ -32,11 +32,11 @@ if($paginasT==0 && $intervalo==0){
 	$COEm="SELECT * FROM detalle_lotes WHERE id_lote='".$idLote."' and status='Empaque' and id_irre_wk='N/A' and TipoEntrada not like '%Garant%'";
 	$exeCOEm=mysql_query($COEm,conectarBd());
 	$noRegCOEm=mysql_num_rows($exeCOEm);
-	//echo"noreg=$noRegCOEm ";
 	if($noRegCOEm>$pag){
-		$paginasT=$noReg/$pag;
-		if(is_int($paginasT)){}else{$paginasT=intval($paginasT+1);}
-		echo"$paginasT";
+		$paginasT=$noRegCOEm/$pag;
+		if(is_int($paginasT)){}else{
+			$paginasT=intval($paginasT+1);
+		}
 		?>
 		<input type="hidden" id="pagAct" name="pagAct" value="<?=$pagAct;?>"/>
 		<input type="hidden" id="limite" name="limite" value="<?=$lim;?>"/>
@@ -64,9 +64,7 @@ if($paginasT==0 && $intervalo==0){
 	<input type="hidden" id="limite" name="limite" value="<?=$lim;?>"/>
 	<input type="hidden" id="tp" name="tp" value="<?=$paginasT;?>"/>
 	<script>
-		//$("#paginador").show();
 		$("#PAct").html("<?=$pagAct;?>");
-		//$("#TotPa").html("<?=$paginasT;?>")
 	</script><?
 }
 $conL="SELECT * FROM lote where id_lote='".$idLote."'";

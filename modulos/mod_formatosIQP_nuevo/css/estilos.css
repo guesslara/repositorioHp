@@ -407,3 +407,36 @@ html,body,document{position:absolute;margin:0px;height:100%; width:100%; margin:
 .anc{
 	width:50%;
 }
+.tecTab{
+	width:100%;
+	font-size: 8px;
+	border-collapse: collapse;
+	border:0px solid #000;
+}
+.tecTab th{
+	text-align: justify;
+}
+.tecTab td{
+	text-align: justify;
+}
+/*.encabTec{
+	background: #A6A4A4;
+	font-size: 7px;
+	color:#000;
+	font-weight: bold;
+}*/
+.capTab{
+	width: 100%;
+	font-size: 6px;
+	border-collapse: collapse;
+}
+.enctabCap{
+	background: #AFACAC;
+	font-size: 6px;
+	color:#000;
+	font-weight: bold;
+	border:1px solid #000;
+}
+.capTab th{
+	border:1px solid #000;
+}

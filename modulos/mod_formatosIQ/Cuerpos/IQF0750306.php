@@ -18,7 +18,7 @@ include("../../mod_formatos/nuevo$idL.php");
         <script type="text/javascript" src="js/calendar.js"></script><!-- librería principal del calendario -->  
         <script type="text/javascript" src="js/calendar-es.js"></script><!-- librería para cargar el lenguaje deseado -->   
         <script type="text/javascript" src="js/calendar-setup.js"></script><!-- librería que declara la función Calendar.setup, que ayuda a generar un calendario en unas pocas líneas de código -->
-	<script type="text/javascript" src="js/funcionesEnsamble.js" ></script>
+	<script type="text/javascript" src="../js/funcionesEnsamble.js" ></script>
 	<script type="text/javascript" src="../../../clases/jquery-1.3.2.min.js"></script>
       		
 		<form id="formdaños" enctype="multipart/form-data">
@@ -45,7 +45,7 @@ include("../../mod_formatos/nuevo$idL.php");
 	        <table border = "" cellpading "0" cellspacing = "0" style=" margin: 5px 50px 10px 30px;">
 		<tr>
 		   <td style="font-size: 8pt;"><b>DIRIGIDO A:</b> </td>
-		   <td><input type ="text" name = "nombre" id = "nombre" size="50" maxlenght="50" style="width:382px;height:25px;"/></td>
+		   <td><input type ="text" name = "nombre" id = "nombre" style="width:382px;height:25px;"/></td>
 		 </tr>
 		</table>
 		<table border = "" cellpading "0" cellspacing = "0"  style=" margin: 5px 50px 10px 30px;">
@@ -53,7 +53,7 @@ include("../../mod_formatos/nuevo$idL.php");
 		   <td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt;"><b>INTRODUCCI&Oacute;N:</b></td>
 		</tr>
 		<tr>
-		   <td><input type ="text" name = "intro" id = "intro" size="80" style="width:630px;height:70px;"/></td>
+		   <td><textarea name = "intro" id = "intro" cols="5" rows="3" style="width:630px;height:50px;"></textarea></td>
 		 </tr>
 		</table>
 		 <table border = "" cellpading "0" cellspacing = "0" style=" margin: 5px 50px 10px 30px;">
@@ -61,22 +61,22 @@ include("../../mod_formatos/nuevo$idL.php");
 		   <td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt;"><b>CONTENIDO/PRODUCTOS Y/O N&Uacute;MEROS DE PARTE OBJETO DEL INFORME</b></td>
 		</tr>
 		 <tr>
-		   <td><input type ="text" name = "numpart" id = "numpart" size="80" style="width:630px;height:70px;"/></td>
+		   <td><textarea name = "numpart" id = "numpart" cols="5" rows="3" style="width:630px;height:50px;"></textarea></td>
 		 </tr>
                 </table>
-		<table border = "" cellpading = "0" cellspacing = "0" style=" margin: 5px 50px 10px 30px; width:639px;">
+		<table border = "" cellpading = "0" cellspacing = "0" style=" margin: 5px 50px 10px 30px; width:630px;">
 		 <tr>
-		<td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt;"><b>FOTOGRAF&Iacute;AS O GR&Aacute;FICOS</b> (SI APLICA)<br>
-		   <input type ="file"  multiple="multiple" name = "uploadedfile" id = "uploadedfile" title="Elige un archivo para subir."/></td>                   
-		</tr>
+		<td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt;"><b>FOTOGRAF&Iacute;AS O GR&Aacute;FICOS</b> (SI APLICA)
+		   <div class="custom-input-file"><input type ="file"   accept="image/jpg" multiple="multiple" name = "uploadedfile" id = "uploadedfile" title="Elige un archivo para subir."/></div></td></tr>                   
+		 <tr><td><div id="foto_b_1" align="right" style="background-color:#EFFBFB; margin: 1px 70px 0px 2px; width:560px;height:170px;"></div></td>
+		 </tr>
 		</table>
-		<table border = "" cellpading ="0" cellspacing = "0" style=" margin: 5px 50px 10px 30px;"><br><br><br><br><br><br><br><br>
-		<!--<div id="foto_b_1" style="background-color:#EFFBFB; width:386px;height:170px;"></div>-->
+		<table border = "" cellpading ="0" cellspacing = "0" style=" margin: 1px 50px 0px 30px;">
 		<tr>
-		   <td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt;"><b>COMENTARIOS:</b></td><br>
+		   <td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt; margin: 1px 50px 0px 30px;"><b>COMENTARIOS:</b></td><br>
 		</tr>
 		<tr>
-		   <td><input type ="text" name = "coment" id = "coment" size="80" style="width:630px;height:70px;"/></td>
+		   <td><textarea name ="coment" id = "coment" cols="5" rows="3" style="width:630px;height:60px;"></textarea></td>
 		 </tr>
 		<table border = "" cellpading "0" cellspacing = "0" style="margin: 5px 5px 5px 270px;">
 		<tr>
@@ -87,7 +87,7 @@ include("../../mod_formatos/nuevo$idL.php");
 		   <input type="button" value="GUARDAR"  onclick="valida()"  style="font-size: 7pt;"/> <input type="button" value="VER"  onclick="formatoPDF('<?=$nombre?>')" style="font-size: 7pt;"/></td>
 		</tr>
 		<tr>
-		<td><input type ="text" name = "firma" id = "firma" align="center" size="20"  style="width:170px;height:50px;"/></td>		
+		<td><input type ="text" name = "firma" id = "firma" align="center" style="width:170px;height:50px;"/></td>		
 		</tr>
 		
 		</table
