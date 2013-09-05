@@ -2,7 +2,6 @@
 $idUsuario="1";
 $idLote="9";
 $idProyecto="1";
-$noFormato="IQF0750302";
-$nombre="IQF0750302_REPORTE DE SALIDA DE MONITORES REPARADOS_REV.01_1";
-$datoE="0";
+$noFormato="IQF0750306";
+$nombre="IQF0750306_INFORME DE DAÑOS Y SUCESOS_REV.00_3";
 ?>

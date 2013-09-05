@@ -440,3 +440,9 @@ html,body,document{position:absolute;margin:0px;height:100%; width:100%; margin:
 .capTab th{
 	border:1px solid #000;
 }
+.capTab td{
+	border:1px solid #000;
+}
+.capTab tr{
+	height: 60px;
+}

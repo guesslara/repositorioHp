@@ -96,14 +96,26 @@ function muestraTiempo(noFormato){
 function insertform(noform){
 	//alert("aqui esta");
 	var fecha=document.getElementById("fecha").value;
+	var nombr=document.getElementById("nombre").value;
+        var intro=document.getElementById("intro").value;
 	var numparte=document.getElementById("numpart").value;
 	var picture=document.getElementById("uploadedfile").value;
 	var comentarios=document.getElementById("coment").value;
 	var firma=document.getElementById("firma").value;
-	var parametros="action=insertardatos&fecha="+fecha+"&nuparte="+numparte+"&pic="+picture+"&coment="+comentarios+"&firma="+firma;
+	var parametros="action=insertardatos&fecha="+fecha+"&name="+nombr+"&introd="+intro+"&nuparte="+numparte+"&pic="+picture+"&comenta="+comentarios+"&firma="+firma;
 //alert(parametros);
-	ajaxApp("uno","../controladorEnsamble.php",parametros,"POST");
+	ajaxApp("uno","controladorEnsamble.php",parametros,"POST");
 }
+function confirmar(){ 
+            confirmar=confirm("El documento no contendra evidencia fotografica?");	
+	    if (confirmar){ 
+               alert('Confirmar');
+	            insertform();
+	        }else{ 
+                 alert('Cargar Imagen en el boton examinar');
+	         return;}
+            }
+
 function valida(){
         var fech=document.getElementById("fecha").value;
         var nombr=document.getElementById("nombre").value;
@@ -128,8 +140,8 @@ function valida(){
             msj="Ingresa el numero de parte en el espacio correspondiente";
         }
         if (fotito==""){
-            msj="Cargar foto de evidencia en el espacio correspondiente";
-        }
+             confirmar();
+	}
         if (comentar==""){
             msj="Escribir comentarios en el espacio correspondiente";
         }

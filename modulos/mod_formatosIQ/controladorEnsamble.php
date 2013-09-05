@@ -54,17 +54,14 @@
 		break;
 	        case "insertardatos":
                         $date=$_POST["fecha"];
-			$numparte=$_POST["nupart"];
-			copy($_FILES['pic']['tmp_name'],$_FILES['pic']['name']);
-                        $foto=$_FILES['pic']['name'];
-                        //echo "<div id="foto_b_1">;<img src=\"$foto\"></div>";
-			//$picture=$_POST["pic"];//llamando id de foto funcionEnsamble
-			//$rutaEnServidor='imagen';// nombre del campo para almacenar fotos en tabla detalle_IQFO750306
-                        //$rutaTemporal=$_FILES[$picture]['tmp_name']; 
-                        //$foto=$rutaEnServidor;
-                        //move_uploaded_file($rutaTemporal,$foto);
-			$coment=$_POST["coment"];
+			$nom=$_POST['name'];
+			$intrr=$_POST['introd'];
+			$numparte=$_POST["nuparte"];
+		        $foto=$_POST["pic"];
+			copy($_FILES['$foto']['tmp_name'],$_FILES['$foto']['name']);
+                        $img=$_FILES['$foto']['name'];
+			$coment=$_POST["comenta"];
 			$firma=$_POST["firma"];
-			$objLote->insertardatos($date,$numparte,$foto,$coment,$firma);
+			$objLote->insertardatos($date,$nom,$intrr,$numparte,$img,$coment,$firma);
                 break;
 	}

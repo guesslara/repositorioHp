@@ -17,7 +17,7 @@ include("../../mod_formatos/nuevo$idL.php");
 $paginasT=$_POST['totalpag'];
 $intervalo=$_POST['intervalo'];
 $pagAct=$_POST['pagAct'];
-$pag=11;//pag es el limite de registros
+$pag=6;//pag es el limite de registros
 $lim=$pag+$intervalo;
 if($intervalo==0){
 	?><script>
@@ -35,7 +35,7 @@ if($paginasT==0 && $intervalo==0){
 	$exeCon=mysql_query($CON,conectarBd());
 	$noReg=mysql_num_rows($exeCon);
 	if($noReg>$pag){
-		$paginasT=1+(intval($noReg/$pag));
+		$paginasT=(intval($noReg/$pag));
 		//echo"pag= $paginasT";
 		?>
 		<input type="hidden" id="pagAct" name="pagAct" value="<?=$pagAct;?>"/>
@@ -47,7 +47,7 @@ if($paginasT==0 && $intervalo==0){
 			$("#TotPa").html("<?=$paginasT;?>")
 		</script><?
 		$CON="SELECT detalle_lotes.*, detalleDYR.idDetalleDYR, detalleDYR.id_item, detalleDYR.status AS statusDYR, detalleDYR.observaciones AS detalleDYR	FROM detalle_lotes INNER JOIN detalleDYR ON detalleDYR.id_item= detalle_lotes.id_item
-		  WHERE detalle_lotes.id_tecnico='".$datoE."' and (detalle_lotes.status='Empaque' or detalle_lotes.status='SCRAP') ORDER BY (detalleDYR.idDetalleDYR) limit 0,11";
+		  WHERE detalle_lotes.id_tecnico='".$datoE."' and (detalle_lotes.status='Empaque' or detalle_lotes.status='SCRAP') ORDER BY (detalleDYR.idDetalleDYR) limit 0,6";
 		$exeCon=mysql_query($CON,conectarBd());
 	}else{
 		?><script>
@@ -57,7 +57,7 @@ if($paginasT==0 && $intervalo==0){
 	}
 }else{
 	$CON="SELECT detalle_lotes.*, detalleDYR.idDetalleDYR, detalleDYR.id_item, detalleDYR.status AS statusDYR, detalleDYR.observaciones AS detalleDYR	FROM detalle_lotes INNER JOIN detalleDYR ON detalleDYR.id_item= detalle_lotes.id_item
-		  WHERE detalle_lotes.id_tecnico='".$datoE."' and (detalle_lotes.status='Empaque' or detalle_lotes.status='SCRAP') ORDER BY (detalleDYR.idDetalleDYR) limit ".$intervalo.",11";
+		  WHERE detalle_lotes.id_tecnico='".$datoE."' and (detalle_lotes.status='Empaque' or detalle_lotes.status='SCRAP') ORDER BY (detalleDYR.idDetalleDYR) limit ".$intervalo.",6";
 	$exeCon=mysql_query($CON,conectarBd());
 	$noReg=mysql_num_rows($exeCon);
 	?>
@@ -78,6 +78,7 @@ $exeTec=mysql_query($conTec,conectarBd());
 $rowTec=mysql_fetch_array($exeTec);
 $i=($intervalo)+1;
 $capC=1;
+//print($noReg);
 ?>
 <div id="cont" style="margin-top: 10px;">
 	<input type="hidden" id="limreg" name="limreg" value="<?=$pag;?>"/>
@@ -90,18 +91,18 @@ $capC=1;
 		<div id="arriba" style="width:100%;height:40px;background:#FFF;clear:both;margin-left:0px;border:1px solid #000;"> 
 			<table class="tecTab">
 				<tr>
-					<th rowspan=2 style="width:15%;">NOMBRE DEL T&Eacute;CNICO:</th>
-					<td rowspan=2 style="width:15%;"><div style="border:1px solid #000;width:180px;font-weight:bold;font-size:9px;"><?=$rowTec['nombre']." ".$rowTec['apaterno'];?></div></td>
+					<th rowspan=6 style="width:15%;">NOMBRE DEL T&Eacute;CNICO:</th>
+					<td rowspan=6 style="width:15%;"><div style="border:1px solid #000;width:180px;font-weight:bold;font-size:9px;"><?=$rowTec['nombre']." ".$rowTec['apaterno'];?></div></td>
 					<th style="width:13%;">FECHA INGRESO:</th>
 					<td style="width:15%;border-bottom:1px solid #000; text-align:center;"><?=$roL['fecha_reg']?></td>
 					<th style="width:10%;">FECHA SALIDA:</th>
-					<td style="width:20%;border-bottom:1px solid #000; text-align:center;"><pre style="display:inline">&#09;</pre><?=$roL['fecha_tat']?><pre style="display:inline">&#09;</pre></td>
+					<td style="width:60%;border-bottom:1px solid #000; text-align:center;"><pre style="display:inline">&#09;</pre><?=$roL['fecha_tat']?><pre style="display:inline">&#09;</pre></td>
 				</tr>
 				<tr>
 					<th style="width:13%;">FOLIO:</th>
 					<td style="width:15%;border-bottom:1px solid #000; text-align:center;">00000</td>
 					<th style="width:10%;">LOTE  IQE:</th>
-					<td style="width:20%;border-bottom:1px solid #000; text-align:center;"><pre style="display:inline">&#09;</pre><?=$roL['id_lote']?> (<?=$roL['num_po']?>)<pre style="display:inline">&#09;</pre></td>
+					<td style="width:60%;border-bottom:1px solid #000; text-align:center;"><pre style="display:inline">&#09;</pre><?=$roL['id_lote']?> (<?=$roL['num_po']?>)<pre style="display:inline">&#09;</pre></td>
 				</tr>
 			</table>
 		</div>
@@ -138,7 +139,7 @@ $capC=1;
 						$Condes="SELECT * from CAT_SENC where id_SENC='".$rowDe['id_Senc']."'";
 					    $exeSEN=mysql_query($Condes,conectarBd());
 					    $rowSENC=mysql_fetch_array($exeSEN);
-					    $noParte=$rowSENC[2];
+					    $noParte=$rowSENC[6];
 					    $descripcion=$rowSENC[4];
 					    if($rowDe['detalleDYR']==""){
 					    	$obs="--";
@@ -149,8 +150,88 @@ $capC=1;
 					    }else{
 					    	$fab=$rowDe['fabRev'];
 					    }
-
-
+					    $conFab="SELECT * FROM CAT_fabricante WHERE id_fabricante='".$rowDe['id_fabricante']."'";
+					    $exeFab=mysql_query($conFab,conectarBd());
+					    $noFab=mysql_num_rows($exeFab);
+					    if($noFab==0){
+					    	$fabri="--";
+					    }else{
+					    	$rowFab=mysql_fetch_array($exeFab);
+					    	$fabri=$rowFab['nombre_fabricante'];
+					    }
+					    if($rowDe['id_fallas']=='N/A'){
+					    	$fallas="N/A";
+					    }else{
+						    $explodeFallas=explode(",", $rowDe['id_fallas']);
+						    $implodeFallas=implode("','", $explodeFallas);
+						    $conFallas="SELECT * FROM CAT_fallas WHERE id_fallas IN ('".$implodeFallas."')";
+						    $exeFallas=mysql_query($conFallas,conectarBd());
+						    $noFallas=mysql_num_rows($exeFallas);
+						    if($noFallas==0){
+						    	$fallas="N/A";
+						    }else{
+						    	$arrayFallas=array();
+						    	while($rowFallas=mysql_fetch_array($exeFallas)){
+						    		array_push($arrayFallas, $rowFallas['tipo_falla']);
+						    	}
+						    	$fallas=implode(",", $arrayFallas);
+						    }
+					    }
+					    if($rowDe['id_rootCause']=='N/A'){
+					    	$rootCause="N/A";
+					    }else{
+						    $explodeRoot=explode(",", $rowDe['id_rootCause']);
+						    $implodeRoot=implode("','", $explodeRoot);
+						    $conRoot="SELECT * FROM CAT_rootCause WHERE id_rootCause IN ('".$implodeRoot."')";
+						    $exeRoot=mysql_query($conRoot,conectarBd());
+						    $noRoot=mysql_num_rows($exeRoot);
+						    if($noRoot==0){
+						    	$rootCause="N/A";
+						    }else{
+						    	$arrayRoot=array();
+						    	while($rowRoot=mysql_fetch_array($exeRoot)){
+						    		array_push($arrayRoot, $rowRoot['codigoRoot']);
+						    	}
+						    	$rootCause=implode(",", $arrayRoot);
+						    }
+					    }
+					    if($rowDe['id_rootCause']=='N/A'){
+					    	$rootCause="N/A";
+					    }else{
+						    $explodeRoot=explode(",", $rowDe['id_rootCause']);
+						    $implodeRoot=implode("','", $explodeRoot);
+						    $conRoot="SELECT * FROM CAT_rootCause WHERE id_rootCause IN ('".$implodeRoot."')";
+						    $exeRoot=mysql_query($conRoot,conectarBd());
+						    $noRoot=mysql_num_rows($exeRoot);
+						    if($noRoot==0){
+						    	$rootCause="N/A";
+						    }else{
+						    	$arrayRoot=array();
+						    	while($rowRoot=mysql_fetch_array($exeRoot)){
+						    		array_push($arrayRoot, $rowRoot['codigoRoot']);
+						    	}
+						    	$rootCause=implode(",", $arrayRoot);
+						    }
+					    }
+					    if($rowDe['id_codigoReparacion']=='N/A'){
+					    	$codRep="N/A";
+					    }else{
+						    $explodeCodRep=explode(",", $rowDe['id_codigoReparacion']);
+						    $implodeCodRep=implode("','", $explodeCodRep);
+						    $conCodRep="SELECT * FROM CAT_codigoReparacion WHERE id_codigoReparacion IN ('".$implodeCodRep."')";
+						    $exeCodRep=mysql_query($conCodRep,conectarBd());
+						    $noCodRep=mysql_num_rows($exeCodRep);
+						    if($noCodRep==0){
+						    	$codRep="N/A";
+						    }else{
+						    	$arrayCodRep=array();
+						    	while($rowCodRep=mysql_fetch_array($exeCodRep)){
+						    		array_push($arrayRoot, $rowRoot['codigoRoot']);
+						    	}
+						    	$rootCause=implode(",", $arrayRoot);
+						    }
+					    }
+					    
 ?>
 						<tr>
 							<th style="width:auto;"><?=$capC;?></th>
@@ -159,18 +240,17 @@ $capC=1;
 							<th style="width:auto;"><?=$noParte?></th>
 							<th style="width:auto;"><?=$rowDe['numSerie']?></th>
 							<th style="width:auto;"><?=$rowDe['codeType']?></th>
-							<th style="width:auto;">FABRICANTE</th>
+							<th style="width:auto;"><?=$fabri;?></th>
 							<th style="width:auto;"><?=$rowDe['paisManufactura']?></th>
 							<th style="width:auto;"><?=$rowDe['statusDYR']?></th>
-							<th style="width:auto;">FALLA ENCONTRADA</th>
-							<th style="width:auto;">ROOT CAUSE</th>
+							<th style="width:auto;"><?=$fallas?></th>
+							<th style="width:auto;"><?=$rootCause?></th>
 							<th style="width:auto;">C&Oacute;DIGO REPARACI&Oacute;N</th>
 							<th style="width:auto;">C&Oacute;DIGO IRR/WK</th>
 							<th style="width:auto;">--</th>
 							<th style="width:auto;">--</th>
 							<th style="width:auto;"><?=$rowDe['TiempoReparacion']?></th>
 							<th style="width:auto;"><?=$fab?></th>
-							<th style="width:auto;">ROOT CAUSE</th>
 							<th style="width:auto;"><?=$rowDe['TiempoFuncionamiento']?></th>
 							<th style="width:auto;">PARTES CAMBIADAS</th>
 							<th style="width:auto;">FABRICANTE DE COMPONENTES</th>
@@ -184,6 +264,21 @@ $capC=1;
 			    	for($v=$i;$v<=$lim;$v++){
 ?>
 					    <tr>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
+					    	<td>&nbsp;</td>
 					    	<td>&nbsp;</td>
 					    	<td>&nbsp;</td>
 					    	<td>&nbsp;</td>
