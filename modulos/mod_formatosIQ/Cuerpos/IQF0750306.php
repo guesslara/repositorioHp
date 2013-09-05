@@ -67,6 +67,7 @@ include("../../mod_formatos/nuevo$idL.php");
 		<table border = "" cellpading = "0" cellspacing = "0" style=" margin: 5px 50px 10px 30px; width:630px;">
 		 <tr>
 		<td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt;"><b>FOTOGRAF&Iacute;AS O GR&Aacute;FICOS</b> (SI APLICA)<img src="camera.png" style="width:20px; height:10px;">
+		   <input type="hidden" name="MAX_FILE_SIZE" value="200000" />
 		   <input type ="file"   accept="image/jpg" multiple="multiple" name = "uploadedfile" id = "uploadedfile" title="Elige un archivo para subir."/></td></tr>                   
 		 <tr><td><div id="foto_b_1" align="right" style="background-color:#EFFBFB; margin: 1px 70px 0px 2px; width:560px;height:170px;"></div></td>
 		 </tr>

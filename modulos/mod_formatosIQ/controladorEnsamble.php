@@ -58,10 +58,15 @@
 			$intrr=$_POST['introd'];
 			$numparte=$_POST["nuparte"];
 		        $foto=$_POST["pic"];
-			copy($_FILES['$foto']['tmp_name'],$_FILES['$foto']['name']);
-                        $img=$_FILES['$foto']['name'];
+			/*$target_path = "../../mod_formatosIQP_nuevo/uploads/";//ruta de almacenamiento de imagen en carpeta nombrada uploads
+                        $target_path = $target_path . basename( $_FILES['archivo_foto']['name']);
+                        move_uploaded_file($_FILES['archivo_foto']['tmp_name'],$target_path);
+                        echo "El archivo se grabo correctamente.<br>";
+                        $imagen=$_FILES['archivo_foto']['name'];
+                        echo "<img src=\"$nombre\">";*/
 			$coment=$_POST["comenta"];
 			$firma=$_POST["firma"];
-			$objLote->insertardatos($date,$nom,$intrr,$numparte,$img,$coment,$firma);
+			$objLote->insertardatos($date,$nom,$intrr,$numparte,$foto,$coment,$firma);
+			/*window.location.href="uploader2.php?pic=<?=$foto?>";*/
                 break;
 	}

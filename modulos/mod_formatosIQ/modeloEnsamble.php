@@ -146,8 +146,8 @@
 		}
 		
 			  
-	        function insertardatos($date,$nom,$intrr,$numparte,$img,$coment,$firma){
-			$sql="INSERT INTO detalle_IQFO750306 (fecha,destinatario,introduccion,num_parte,imagenes,comentarios,elaboro) VALUES ('".$date."', '".$nom."', '".$intrr."', '".$numparte."', '".$img."', '".$coment."','".$firma."')";
+	        function insertardatos($date,$nom,$intrr,$numparte,$foto,$coment,$firma){
+			$sql="INSERT INTO detalle_IQFO750306 (fecha,destinatario,introduccion,num_parte,imagenes,comentarios,elaboro) VALUES ('".$date."', '".$nom."', '".$intrr."', '".$numparte."', '".$foto."', '".$coment."','".$firma."')";
                         echo"$sql";
 			$exeCon=mysql_query($sql,$this->conectarBd());
 			if(!$exeCon){
@@ -169,7 +169,7 @@
 			<tr>		
 			   <td style="font-size: 9pt;"><b>FECHA:</b></td>
 			   <td><input type ="text" name = "fecha" id = "fecha"  value="<?="$date";?>" size="50" style="width:200px;height:25px;"/>
-			   <input type="button" id="date"  value="..." />
+			   <!--<input type="button" id="date"  value="..." />-->
 			<!-- script que define y configura el calendario-->
 			<script type="text/javascript">
 			    Calendar.setup({
@@ -206,9 +206,9 @@
 			</table>
 			<table border = "" cellpading = "0" cellspacing = "0" style=" margin: 5px 50px 10px 30px; width:630px;">
 			 <tr>
-			<td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt;"><b>FOTOGRAF&Iacute;AS O GR&Aacute;FICOS</b> (SI APLICA)<img src="camera.png" style="width:20px; height:10px;">
-			   <input type ="file"   accept="image/jpg" multiple="multiple" name = "uploadedfile" id = "uploadedfile" title="Elige un archivo para subir."/></td></tr>                   
-			 <tr><td><div id="foto_b_1" align="right" style="background-color:#EFFBFB; margin: 1px 70px 0px 2px; width:560px;height:170px;"><?="$img";?></div></td>
+			<td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt;"><b>FOTOGRAF&Iacute;AS O GR&Aacute;FICOS</b> (SI APLICA)
+			   <!--<input type ="file"   accept="image/jpg" multiple="multiple" name = "uploadedfile" id = "uploadedfile" title="Elige un archivo para subir."/>--></td></tr>                   
+			 <tr><td><div id="foto_b_1" align="right" style="background-color:#EFFBFB; margin: 1px 70px 0px 2px; width:560px;height:170px;"><?="$foto";?></div></td>
 			 </tr>
 			</table>
 			<table border = "" cellpading ="0" cellspacing = "0" style=" margin: 1px 50px 0px 30px;">
@@ -224,7 +224,7 @@
 	<?
 			$nombre=$nomFormato."-1";
 	?>
-			   <input type="button" value="GUARDAR"  onclick="valida()"  style="font-size: 7pt;"/> <input type="button" value="VER"  onclick="formatoPDF('<?=$nombre?>')" style="font-size: 7pt;"/></td>
+			   <!--<input type="button" value="GUARDAR"  onclick="valida()"  style="font-size: 7pt;"/> <input type="button" value="VER"  onclick="formatoPDF('<?=$nombre?>')" style="font-size: 7pt;"/>--></td>
 			</tr>
 			<tr>
 			<td><input type ="text" name = "firma" id = "firma" align="center" value="<?="$firma";?>" style="width:170px;height:50px;"/></td>		

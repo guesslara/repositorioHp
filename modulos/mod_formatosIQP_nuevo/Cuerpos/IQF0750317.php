@@ -126,7 +126,6 @@ $capC=1;
 					<th style="width:auto;">Rev. Out</th>
 					<th style="width:auto;">TIEMPO REPARACI&Oacute;N</th>
 					<th style="width:auto;">fabRev</th>
-					<th style="width:auto;">ROOT CAUSE</th>
 					<th style="width:auto;">TIEMPO DE FUNCIONAMIENTO</th>
 					<th style="width:auto;">PARTES CAMBIADAS</th>
 					<th style="width:auto;">FABRICANTE DE COMPONENTES</th>
@@ -139,7 +138,7 @@ $capC=1;
 						$Condes="SELECT * from CAT_SENC where id_SENC='".$rowDe['id_Senc']."'";
 					    $exeSEN=mysql_query($Condes,conectarBd());
 					    $rowSENC=mysql_fetch_array($exeSEN);
-					    $noParte=$rowSENC[6];
+					    $noParte=$rowSENC[2];
 					    $descripcion=$rowSENC[4];
 					    if($rowDe['detalleDYR']==""){
 					    	$obs="--";
@@ -149,6 +148,16 @@ $capC=1;
 					    	$fab="N/A";
 					    }else{
 					    	$fab=$rowDe['fabRev'];
+					    }
+					    if($rowDe['TiempoReparacion']==""){
+					    	$tiempoFun="--";
+					    }else{
+					    	$tiempoFun=$rowDe['TiempoFuncionamiento'];
+					    }
+					    if($rowDe['TiempoFuncionamiento']==""){
+					    	$tiempoRep="--";
+					    }else{
+					    	$tiempoRep=$rowDe['TiempoReparacion'];
 					    }
 					    $conFab="SELECT * FROM CAT_fabricante WHERE id_fabricante='".$rowDe['id_fabricante']."'";
 					    $exeFab=mysql_query($conFab,conectarBd());
@@ -195,22 +204,22 @@ $capC=1;
 						    	$rootCause=implode(",", $arrayRoot);
 						    }
 					    }
-					    if($rowDe['id_rootCause']=='N/A'){
-					    	$rootCause="N/A";
+					    if($rowDe['id_irre_wk']=='N/A'){
+					    	$irre_wk="N/A";
 					    }else{
-						    $explodeRoot=explode(",", $rowDe['id_rootCause']);
-						    $implodeRoot=implode("','", $explodeRoot);
-						    $conRoot="SELECT * FROM CAT_rootCause WHERE id_rootCause IN ('".$implodeRoot."')";
-						    $exeRoot=mysql_query($conRoot,conectarBd());
-						    $noRoot=mysql_num_rows($exeRoot);
-						    if($noRoot==0){
-						    	$rootCause="N/A";
+						    $explodeIrrWk=explode(",", $rowDe['id_irre_wk']);
+						    $implodeIrrWk=implode("','", $explodeIrrWk);
+						    $conIrrWk="SELECT * FROM CAT_irre_wk WHERE id_irre_wk IN ('".$implodeIrrWk."')";
+						    $exeIrWk=mysql_query($conIrrWk,conectarBd());
+						    $noIrrWk=mysql_num_rows($exeIrWk);
+						    if($noIrrWk==0){
+						    	$irre_wk="N/A";
 						    }else{
-						    	$arrayRoot=array();
-						    	while($rowRoot=mysql_fetch_array($exeRoot)){
-						    		array_push($arrayRoot, $rowRoot['codigoRoot']);
+						    	$arrayIrWk=array();
+						    	while($rowIrrWk=mysql_fetch_array($exeIrWk)){
+						    		array_push($arrayIrWk, $rowIrrWk['codigo']);
 						    	}
-						    	$rootCause=implode(",", $arrayRoot);
+						    	$irre_wk=implode(",", $arrayIrWk);
 						    }
 					    }
 					    if($rowDe['id_codigoReparacion']=='N/A'){
@@ -226,9 +235,36 @@ $capC=1;
 						    }else{
 						    	$arrayCodRep=array();
 						    	while($rowCodRep=mysql_fetch_array($exeCodRep)){
-						    		array_push($arrayRoot, $rowRoot['codigoRoot']);
+						    		array_push($arrayCodRep, $rowCodRep['codigo_reparacion']);
 						    	}
-						    	$rootCause=implode(",", $arrayRoot);
+						    	$codRep=implode(",", $arrayCodRep);
+						    }
+					    }
+					    if($rowDe['id_refacciones']=='N/A'){
+					    	$ref="N/A";
+					    	$fabRef="N/A";
+					    }else{
+						    $explodeRef=explode(",", $rowDe['id_codigoReparacion']);
+						    $implodeRef=implode("','", $explodeRef);
+						    $conRef="SELECT * FROM CAT_codigoReparacion WHERE id_codigoReparacion IN ('".$implodeRef."')";
+						    $exeRef=mysql_query($conCodRep,conectarBd());
+						    $noRef=mysql_num_rows($conRef);
+						    if($noRef==0){
+						    	$ref="N/A";
+						    	$fabRef="N/A";
+						    }else{
+						    	$arrayRef=array();
+						    	$arrFabRef=array();
+						    	while($rowRef=mysql_fetch_array($exeRef)){
+						    		array_push($arrayRef, $rowRef['id_en_almacen']);
+						    		if($rowRef['fabricante']==""||$rowRef['fabricante']==NULL){
+						    			array_push($arrFabRef, "--");
+						    		}else{
+						    			array_push($arrFabRef, $rowRef['fabricante']);
+						    		}
+						    	}
+						    	$ref=implode(",", $arrayRef);
+						    	$fabRef=implode(",", $arrFabRef);
 						    }
 					    }
 					    
@@ -245,15 +281,15 @@ $capC=1;
 							<th style="width:auto;"><?=$rowDe['statusDYR']?></th>
 							<th style="width:auto;"><?=$fallas?></th>
 							<th style="width:auto;"><?=$rootCause?></th>
-							<th style="width:auto;">C&Oacute;DIGO REPARACI&Oacute;N</th>
-							<th style="width:auto;">C&Oacute;DIGO IRR/WK</th>
+							<th style="width:auto;"><?=$codRep?></th>
+							<th style="width:auto;"><?=$irre_wk?></th>
 							<th style="width:auto;">--</th>
 							<th style="width:auto;">--</th>
-							<th style="width:auto;"><?=$rowDe['TiempoReparacion']?></th>
+							<th style="width:auto;"><?=$tiempoRep?></th>
 							<th style="width:auto;"><?=$fab?></th>
-							<th style="width:auto;"><?=$rowDe['TiempoFuncionamiento']?></th>
-							<th style="width:auto;">PARTES CAMBIADAS</th>
-							<th style="width:auto;">FABRICANTE DE COMPONENTES</th>
+							<th style="width:auto;"><?=$tiempoFun?></th>
+							<th style="width:auto;"><?=$ref;?></th>
+							<th style="width:auto;"><?=$fabRef;?></th>
 							<th style="width:auto;"><?=$obs?></th>
 						</tr>
 <?

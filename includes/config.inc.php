@@ -1,6 +1,6 @@
 <?
 	//configuracion de usuario MYSQL para primer base de datos
-	$host="localhost";
+	$host="172.21.5.6:3306";
 	$usuario="desarrollo";
 	$pass="desarrollo";
 	//tabla usuarios	

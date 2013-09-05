@@ -12,11 +12,14 @@
 	
 	class modeloLogin{
 		
-		function verificaInfo($usuarioEntrante,$passEntrante){						
+		function verificaInfo($usuarioEntrante,$passEntrante){	
+		//print_r($_POST);
+		//exit;
 			include("../../includes/conectarbase.php");
 			include("../../includes/txtApp.php");
 			$sqlVerifica="SELECT * FROM $tabla_usuarios WHERE usuario='".mysql_real_escape_string(strip_tags($usuarioEntrante))."'";
-			$resVerifica=mysql_query($sqlVerifica,$this->conexionBd());
+			//print($sqlVerifica);
+			$resVerifica=@mysql_query($sqlVerifica,$this->conexionBd()) or die(mysql_error());
 			$resultados=mysql_num_rows($resVerifica);
 			if($resultados !=0){
 				$rowVerifica=mysql_fetch_array($resVerifica);
@@ -29,7 +32,9 @@
 				$colocaPass=$rowVerifica['cambiarPass'];
 				$sexo=$rowVerifica['sexo'];
 				$nomina=$rowVerifica['nomina'];				
-				$password = md5($passEntrante);				
+				$password = md5($passEntrante);		
+				/*print($password)		;
+				exit;*/
 				if ($usuarioEntrante != $usuario){
 					header("Location:index.php?error=0");
 					exit;
@@ -61,7 +66,7 @@
 				session_start();
 				session_unset();
 				session_destroy();				
-				echo "Acceso no Autorizado";
+				echo "<br>1. Acceso no Autorizado";
 				exit;
 			}
 		}
