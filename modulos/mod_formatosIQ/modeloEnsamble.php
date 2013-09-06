@@ -168,7 +168,8 @@
 				
 			<tr>		
 			   <td style="font-size: 9pt;"><b>FECHA:</b></td>
-			   <td><input type ="text" name = "fecha" id = "fecha"  value="<?="$date";?>" size="50" style="width:200px;height:25px;"/>
+			   <td><input type ="text" name = "fecha" id = "fecha"  value="<?="$date";?>" size="50" style="width:200px;height:20px;"/>
+			   <td><b>HORA</b> <input type="text" name="mireloj" id="mireloj" size="10"></td>
 			   <!--<input type="button" id="date"  value="..." />-->
 			<!-- script que define y configura el calendario-->
 			<script type="text/javascript">

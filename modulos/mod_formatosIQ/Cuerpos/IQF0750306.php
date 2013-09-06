@@ -12,6 +12,7 @@ function conectarBd(){
 /*print_r($_POST);*/
 $idL=$_POST['idLote'];
 include("../../mod_formatos/nuevo$idL.php");
+
 ?>
 	<link rel="stylesheet" type="text/css" href="../css/estilos.css">
 	<link rel="stylesheet" type="text/css" media="all" href="js/calendar-green.css"  title="win2k-cold-1" />
@@ -20,21 +21,24 @@ include("../../mod_formatos/nuevo$idL.php");
         <script type="text/javascript" src="js/calendar-setup.js"></script><!-- librería que declara la función Calendar.setup, que ayuda a generar un calendario en unas pocas líneas de código -->
 	<script type="text/javascript" src="../js/funcionesEnsamble.js" ></script>
 	<script type="text/javascript" src="../../../clases/jquery-1.3.2.min.js"></script>
-      		
-		<form id="formdaños" enctype="multipart/form-data">
+ 
+    <form name="form_reloj" enctype="multipart/form-data">
+
+		<!--<form id="formdaños" enctype="multipart/form-data">-->
 	<div id="uno" style="width:100%; height:100%">
 
 		<table border = "" cellpading "0" cellspacing = "0" style=" margin: 8px 50px 10px 30px;">
 			
-		<tr>		
+		<tr>
 		   <td style="font-size: 9pt;"><b>FECHA:</b></td>
-		   <td><input type ="text" name = "fecha" id = "fecha" size="50" style="width:200px;height:25px;"/>
+		   <td><input type ="text" name = "fecha" id = "fecha" size="50" style="width:150px;height:20px;" value="<?=date('y-m-d');?>" readonly=""/>
 		   <input type="button" id="date"  value="..." />
+		   <td><b>HORA</b> <input type="text" name="mireloj" id="mireloj" size="10" value="<?=date("H:i:s");?> readonly=""></td>
 		<!-- script que define y configura el calendario-->
 		<script type="text/javascript">
 		    Calendar.setup({
 		    inputField     :    "fecha",      // id del campo de texto
-		    ifFormat       :    "%Y-%m-%d",       // formato de la fecha, cuando se escriba en el campo de texto
+		    ifFormat       :    "%Y-%m-%d",  // formato de la fecha, cuando se escriba en el campo de texto
 		    button         :    "date"   // el id del botón que lanzará el calendario
 		    });
 		</script>
@@ -96,6 +100,5 @@ include("../../mod_formatos/nuevo$idL.php");
                 
 	</div>
 		</form>
-		
-		
+</body>
 

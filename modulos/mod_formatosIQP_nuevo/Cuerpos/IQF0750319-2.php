@@ -13,9 +13,7 @@ function conectarBd(){
 $idL=$_POST['idLote'];
 include("../../mod_formatos/nuevo$idL.php");
 ?>
-<input type="hidden" id="idLote" name="idLote" value="<?=$idL;?>"/>
-<link rel="stylesheet" type="text/css" href="../css/estilos.css">
-<?
+<input type="hidden" id="idLote" name="idLote" value="<?=$idL;?>"/><?
 $paginasT=$_POST['totalpag'];
 $intervalo=$_POST['intervalo'];
 $pagAct=$_POST['pagAct'];
@@ -32,7 +30,7 @@ if($paginasT==$pagAct){
 	</script><?
 }
 if($paginasT==0 && $intervalo==0){
-	$CON="SELECT * FROM CAT_refacciones";
+	$CON="SELECT * FROM CAT_rootCause";
 	$exeCon=mysql_query($CON,conectarBd());
 	$noReg=mysql_num_rows($exeCon);
 	if($noReg>$pag){
@@ -47,7 +45,7 @@ if($paginasT==0 && $intervalo==0){
 			$("#PAct").html("<?=$pagAct;?>");
 			$("#TotPa").html("<?=$paginasT;?>")
 		</script><?
-		$CON="SELECT * FROM CAT_refacciones limit 0,16";
+		$CON="SELECT * FROM CAT_rootCause limit 0,16";
 		$exeCon=mysql_query($CON,conectarBd());
 	}else{
 		?><script>
@@ -56,7 +54,7 @@ if($paginasT==0 && $intervalo==0){
 		</script><?
 	}
 }else{
-	$CON="SELECT * FROM CAT_refacciones limit ".$intervalo.",16";
+	$CON="SELECT * FROM CAT_rootCause limit ".$intervalo.",16";
 	$exeCon=mysql_query($CON,conectarBd());
 	$noReg=mysql_num_rows($exeCon);
 	?>
@@ -69,8 +67,6 @@ if($paginasT==0 && $intervalo==0){
 		//$("#TotPa").html("<?=$paginasT;?>")
 	</script><?
 }	
-$conTiempo="SELECT * FROM CAT_tiempoReparacion";
-$exeTiempo=mysql_query($conTiempo,conectarBd());
 $i=($intervalo)+1;
 $capC=1;
 //print($noReg);
@@ -82,43 +78,26 @@ $capC=1;
 		echo"<p style='text-align:center;text-width:bold;'>Actualmente no hay registros</p>";
 	}else{
 ?>
-	<div id="izq" style="width:30%;height:100%;background:#FFF;clear:both;margin-left:0px;border:1px solid #000;float:left;"> 
-		<table class="tabTiempo" align="center">
-			<tr>
-				<th colspan=2>F</th>
-			</tr>
-			<tr>
-				<th colspan=2>TIEMPO DE REPARACI&Oacute;N</th>
-			</tr>
-<?
-		while($rowT=mysql_fetch_array($exeTiempo)){
-			?>
-				<tr>
-					<td style="width:30px;"><?=$rowT['tiempo']?></td>
-					<td style="width:170px;"><?=$rowT['significado']?></td>
-				</tr>
-				<?
-			}
-			?>
-		</table>
+	<div style="width:100%;heigth:20px;text-align:justify;font-weight:bold;clear:bold;font-size:15px;">
+		2.-C&Oacute;DIGOS DE FALLA:
 	</div>
-	<div id="der" style="width:60%;float:left; height:100%;background:#FFF;margin-top:0px;border:1px solid #000;">
-		<table class="tabDer19" align="center">
-			<tr>
-				<th colspan="2">G</th> 
-			</tr>
-			<tr>
-				<th colspan="2">PARTES CAMBIADAS</th>
-			</tr>
-<?	
-				while($rowRef=mysql_fetch_array($exeCon)){
-?>		
-					<tr>
-						<td style="width:40px;"><?=$rowRef['id_en_almacen']?></td>
-						<td style="width:230px;"><?=$rowRef['nombre_generico']?></td>
-					</tr>
+	<div id="tablaRoot" style="width:100%;float:left; height:90%;background:#fff;margin-top:0px;">
+		<table class="tabRoot">
+				<tr>
+					<th>Root Cause Code</th>
+					<th>Code Descripcio&oacute;n</th>
+				</tr>
 <?
-				}
+					while($rowDe=mysql_fetch_array($exeCon)){					    
+?>
+						<tr>
+							<td><?=$rowDe[''];?></td>
+							<td><?=$rowDe['']?></td>
+		
+						</tr>
+<?
+						$i++;
+					}
 				if($noReg<$pag){
 			    	for($v=$i;$v<=$lim;$v++){
 ?>
@@ -130,9 +109,9 @@ $capC=1;
 					}
 				}
 ?>
-		</table>
-	</div>
-?
+			</table>
+		</div>
+<?
 	}
 ?>
 </div>

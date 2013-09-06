@@ -106,9 +106,9 @@ function insertform(noform){
 //alert(parametros);
 	ajaxApp("uno","controladorEnsamble.php",parametros,"POST");
 }
-function confirmar(){ 
-            confirmar=confirm("El documento no contendra evidencia fotografica?");	
-	    if (confirmar){ 
+function confirma(){ 
+            confirma=confirm("El documento no contendra evidencia fotografica?");	
+	    if (confirma){ 
                alert('Confirmar');
 	            insertform();
 	        }else{ 
@@ -156,4 +156,35 @@ function valida(){
 
 	}
 }
+
+/*function Ver_hora() {
+	var mihora =Date();
+	var horas=mihora.getHours().toString();
+	var minutos=mihora.getMinutes().toString();
+	
+	if (segundos.lenght==1) {
+		segundos= "0"+segundos;
+		document.forms[0].mireloj.value=horas + ":" +minutos+ ":" +segundos;
+		var r =setInterval ("Ver_hora()",500);
+	}
+}*/
+/*function iniciarReloj(mireloj){
+    setInterval(function(){
+        var fecha = new Date();
+        var horas = fecha.getHours();
+        if(horas.toString().length == 1){ horas = "0"+horas;}
+ 
+        var minutos = fecha.getMinutes();
+        if(minutos.toString().length == 1){ minutos = "0"+minutos;}
+ 
+        var segundos = fecha.getSeconds();
+        if(segundos.toString().length == 1){ segundos = "0"+segundos;}
+ 
+        var hora_str = horas + ":" + minutos + ":" + segundos ;
+        $("#"+mireloj).php(hora_str);
+    }, 500);
+}*/
+
+
+
     

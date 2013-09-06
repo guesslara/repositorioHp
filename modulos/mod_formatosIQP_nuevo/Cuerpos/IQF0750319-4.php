@@ -17,7 +17,7 @@ include("../../mod_formatos/nuevo$idL.php");
 $paginasT=$_POST['totalpag'];
 $intervalo=$_POST['intervalo'];
 $pagAct=$_POST['pagAct'];
-$pag=10;//pag es el limite de registros
+$pag=6;//pag es el limite de registros
 $lim=$pag+$intervalo;
 if($intervalo==0){
 	?><script>
@@ -30,10 +30,10 @@ if($paginasT==$pagAct){
 	</script><?
 }
 if($paginasT==0 && $intervalo==0){
-	$CON="SELECT * FROM CAT_fallas where id_fallas between 1 and 10";
+	$CON="SELECT detalle_lotes.*, detalleDYR.idDetalleDYR, detalleDYR.id_item, detalleDYR.status AS statusDYR, detalleDYR.observaciones AS detalleDYR	FROM detalle_lotes INNER JOIN detalleDYR ON detalleDYR.id_item= detalle_lotes.id_item
+		  WHERE detalle_lotes.id_tecnico='".$datoE."' and (detalle_lotes.status='Empaque' or detalle_lotes.status='SCRAP') ORDER BY (detalleDYR.idDetalleDYR)";
 	$exeCon=mysql_query($CON,conectarBd());
 	$noReg=mysql_num_rows($exeCon);
-	$noReg=1
 	if($noReg>$pag){
 		$paginasT=(intval($noReg/$pag));
 		//echo"pag= $paginasT";

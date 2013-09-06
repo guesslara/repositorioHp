@@ -446,3 +446,46 @@ html,body,document{position:absolute;margin:0px;height:100%; width:100%; margin:
 .capTab tr{
 	height: 60px;
 }
+.tabTiempo{
+	border-collapse: collapse;
+	border:1px solid #000;
+	font-size: 10px;
+}
+.tabTiempo th{
+	background: #F0F0F0;
+	border:1px solid #000;
+}
+.tabTiempo td{
+	background: #FFF;
+	border:1px solid #000;
+	text-align: center;
+}
+.tabDer19{
+	border:1px solid #000;
+	border-collapse: collapse;
+	font-size: 10px;
+}
+.tabDer19 th{
+	background: #f0f0f0;
+	border:1px solid #000;
+}
+.tabDer19 td{
+	background: #fff;
+	border:1px solid #000;
+	text-align: center;
+}
+.tabDer19 tr{
+	height:20px;
+}
+.tabRoot{
+	border-collapse: collapse;
+	font-size: 10px;
+}
+.tabRoot th{
+	background: #F0F0F0;
+	border:1px solid #000;
+}
+.tabRoot td{
+	background: #fff;
+	border:1px solid #000;
+}
