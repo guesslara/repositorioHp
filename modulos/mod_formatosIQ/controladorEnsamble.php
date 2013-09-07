@@ -57,12 +57,11 @@
 			$nom=$_POST['name'];
 			$intrr=$_POST['introd'];
 			$numparte=$_POST["nuparte"];
-		    $imagen=$_POST["pic"];
+		        $imagen=$_POST["pic"];
 			$target_path = "../../mod_formatosIQP_nuevo/uploads/";//ruta de almacenamiento de imagen en carpeta nombrada uploads
-                        $target_path = $target_path . basename( $_FILES[$imagen]['name']);
-                        move_uploaded_file($_FILES[$imagen]['tmp_name'],$target_path);
-                        echo "El archivo se grabo correctamente.<br>";
-                        $foto=$_FILES[$imagen]['name'];
+                        $target_path = $target_path . basename( $_FILES['archivo_foto']['name']);//elimina la ruta fisica y devuelve solo el nombre y su extencion
+                        move_uploaded_file($_FILES['archivo_foto']['tmp_name'],$target_path);
+                        $foto=$_FILES['archivo_foto']['name'];
                         echo "<img src=\"$foto\">";
 			$coment=$_POST["comenta"];
 			$firma=$_POST["firma"];
