@@ -53,20 +53,32 @@
 			<?
 		break;
 	        case "insertardatos":
+			$idLot=$_POST['loteid'];
                         $date=$_POST["fecha"];
+			$hora=$_POST["timer"];
 			$nom=$_POST['name'];
 			$intrr=$_POST['introd'];
 			$numparte=$_POST["nuparte"];
-		        $imagen=$_POST["pic"];
-			$target_path = "../../mod_formatosIQP_nuevo/uploads/";//ruta de almacenamiento de imagen en carpeta nombrada uploads
-                        $target_path = $target_path . basename( $_FILES['archivo_foto']['name']);//elimina la ruta fisica y devuelve solo el nombre y su extencion
-                        move_uploaded_file($_FILES['archivo_foto']['tmp_name'],$target_path);
-                        $foto=$_FILES['archivo_foto']['name'];
-                        echo "<img src=\"$foto\">";
+		        $foto=$_POST["fott"];
 			$coment=$_POST["comenta"];
 			$firma=$_POST["firma"];
-			$objLote->insertardatos($date,$nom,$intrr,$numparte,$foto,$coment,$firma);
+			$objLote->insertardatos($idLot,$date,$hora,$nom,$intrr,$numparte,$foto,$coment,$firma);
 			/*window.location.href="uploader2.php?pic=<?=$foto?>";*/
                 break;
+	        case "insertardatosdos":
+			$idLot=$_POST['loteid'];
+                        $date=$_POST["fecha"];
+			$hora=$_POST["timer"];
+			$nom=$_POST['name'];
+			$intrr=$_POST['introd'];
+			$numparte=$_POST["nuparte"];
+		        $foto=$_POST["fott"];
+			$coment=$_POST["comenta"];
+			$firma=$_POST["firma"];
+			$objLote->insertardatosdos($idLot,$date,$hora,$nom,$intrr,$numparte,$foto,$coment,$firma);
+			/*window.location.href="uploader2.php?pic=<?=$foto?>";*/
+                break;
+
+
 
 	}

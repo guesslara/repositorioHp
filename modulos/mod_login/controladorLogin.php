@@ -10,8 +10,8 @@
 
 	//se llama al modelo
 	if($_POST['action']=="datosIniciales"){
-		$usuarioEntrante=mysql_real_escape_string(strip_tags($_POST['txtUsuario']));
-		$passEntrante=mysql_real_escape_string(strip_tags($_POST['txtPassword']));
+		$usuarioEntrante=strip_tags($_POST['txtUsuario']);
+		$passEntrante=strip_tags($_POST['txtPassword']);
 		if($usuarioEntrante=="" || $passEntrante==""){
 			header("Location: index.php?error=0");
 			exit;

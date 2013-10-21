@@ -9,22 +9,20 @@ function conectarBd(){
 		return $link;
 	}				
 }
-/*print_r($_POST);*/
 $idL=$_POST['idLote'];
 include("../../mod_formatos/nuevo$idL.php");
-
 ?>
 	<link rel="stylesheet" type="text/css" href="../css/estilos.css">
 	<link rel="stylesheet" type="text/css" media="all" href="js/calendar-green.css"  title="win2k-cold-1" />
         <script type="text/javascript" src="js/calendar.js"></script><!-- librería principal del calendario -->  
         <script type="text/javascript" src="js/calendar-es.js"></script><!-- librería para cargar el lenguaje deseado -->   
         <script type="text/javascript" src="js/calendar-setup.js"></script><!-- librería que declara la función Calendar.setup, que ayuda a generar un calendario en unas pocas líneas de código -->
-	<script type="text/javascript" src="../js/funcionesEnsamble.js" ></script>
-	<script type="text/javascript" src="../../../clases/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="js/funcionesEnsamble.js" ></script>
+	<script type="text/javascript" src="../../clases/jquery-1.3.2.min.js"></script>
  
-    <form name="form_reloj" enctype="multipart/form-data">
-
-		<!--<form id="formdaños" enctype="multipart/form-data">-->
+    
+<form name="form_reloj">
+		
 	<div id="uno" style="width:100%; height:100%">
 
 		<table border = "" cellpading "0" cellspacing = "0" style=" margin: 8px 50px 10px 30px;">
@@ -33,7 +31,7 @@ include("../../mod_formatos/nuevo$idL.php");
 		   <td style="font-size: 9pt;"><b>FECHA:</b></td>
 		   <td><input type ="text" name = "fecha" id = "fecha" size="50" style="width:150px;height:20px;" value="<?=date('y-m-d');?>" readonly=""/>
 		   <input type="button" id="date"  value="..." />
-		   <td><b>HORA</b> <input type="text" name="mireloj" id="mireloj" size="10" value="<?=date("H:i:s");?> readonly=""></td>
+		   <td><b>HORA</b></td><td><iframe src="reloj.html"  id="reloj" frameborder=0 width=100 height=23></iframe></td>
 		<!-- script que define y configura el calendario-->
 		<script type="text/javascript">
 		    Calendar.setup({
@@ -43,6 +41,7 @@ include("../../mod_formatos/nuevo$idL.php");
 		    });
 		</script>
 		  </td>
+		   <td><b>LOTE</b></td><td><input type ="text" name = "lote" id = "lote" style="width:20px;height:20px;" value="<?="$idL";?>" style="border:none; text-align:center"/></td>
 		 </tr>
 		</table>
 		
@@ -70,12 +69,16 @@ include("../../mod_formatos/nuevo$idL.php");
                 </table>
 		<table border = "" cellpading = "0" cellspacing = "0" style=" margin: 5px 50px 10px 30px; width:630px;">
 		 <tr>
-		<td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt;"><b>FOTOGRAF&Iacute;AS O GR&Aacute;FICOS</b> (SI APLICA)<img src="camera.png" style="width:20px; height:10px;">
-		   <input type="hidden" name="MAX_FILE_SIZE" value="200000" />
-		   <input type ="file"   accept="image/jpg" multiple="multiple" name = "uploadedfile" id = "uploadedfile" title="Elige un archivo para subir."/></td></tr>                   
-		 <tr><td><div id="foto_b_1" align="right" style="background-color:#EFFBFB; margin: 1px 70px 0px 2px; width:560px;height:170px;"></div></td>
+			
+		<td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt;"><b>FOTOGRAF&Iacute;AS O GR&Aacute;FICOS</b> (SI APLICA)
+		   <!--<input type="hidden" name="MAX_FILE_SIZE" value="200000" />-->
+		   <!--<input type ="file"   accept="image/jpg" multiple="multiple" name = "uploadedfile" id = "uploadedfile" title="Elige un archivo para subir."/>
+		   <input type="button" value="Subir archivo" onclick="guardar_imagen();" /></td></tr>-->
+		   <tr><td><iframe src="pag_guardar_imagen/opciondereporte.php" id="uploadedfile"  scrolling=no width=630 height=170></iframe></td> 
+		 <!--<div id="foto_b_1" align="right" style="background-color:#EFFBFB; margin: 1px 70px 0px 2px; width:560px;height:170px;"></div>-->
 		 </tr>
 		</table>
+		</form>
 		<table border = "" cellpading ="0" cellspacing = "0" style=" margin: 1px 50px 0px 30px;">
 		<tr>
 		   <td colspan="2" align="left" style="background-color:#F3F781; font-size: 8pt; margin: 1px 50px 0px 30px;"><b>COMENTARIOS:</b></td><br>
@@ -86,10 +89,7 @@ include("../../mod_formatos/nuevo$idL.php");
 		<table border = "" cellpading "0" cellspacing = "0" style="margin: 5px 5px 5px 270px;">
 		<tr>
 		   <td colspan="2" align="center" style="background-color:#F3F781; font-size: 8pt; margin: 8px 5px 10px 0px;"><b>ELABOR&Oacute;:</b>
-<?
-                $nombre=$nomFormato."-1";
-?>
-		   <input type="button" value="GUARDAR"  onclick="valida()"  style="font-size: 7pt;"/> <input type="button" value="VER"  onclick="formatoPDF('<?=$nombre?>')" style="font-size: 7pt;"/></td>
+		   <input type="button" value="GUARDAR"  onclick="valida()"  style="font-size: 7pt;"/></td>
 		</tr>
 		<tr>
 		<td><input type ="text" name = "firma" id = "firma" align="center" style="width:170px;height:50px;"/></td>		
@@ -101,4 +101,5 @@ include("../../mod_formatos/nuevo$idL.php");
 	</div>
 		</form>
 </body>
+<!--sftp://jvillalobos@172.21.5.6/var/www/dev/2013/Septiembre/operaciones/modulos/mod_formatosIQ/pag_guardar_imagen/uploads-->
 

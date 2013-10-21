@@ -12,15 +12,12 @@
 	
 	class modeloLogin{
 		
-		function verificaInfo($usuarioEntrante,$passEntrante){	
-		//print_r($_POST);
-		//exit;
-			include("../../includes/conectarbase.php");
+		function verificaInfo($usuarioEntrante,$passEntrante){				
+			include("../../includes/config.inc.php");
 			include("../../includes/txtApp.php");
-			$sqlVerifica="SELECT * FROM $tabla_usuarios WHERE usuario='".mysql_real_escape_string(strip_tags($usuarioEntrante))."'";
-			//print($sqlVerifica);
+			$sqlVerifica="SELECT * FROM $tabla_usuarios WHERE usuario='".strip_tags($usuarioEntrante)."'";			
 			$resVerifica=@mysql_query($sqlVerifica,$this->conexionBd()) or die(mysql_error());
-			$resultados=mysql_num_rows($resVerifica);
+			$resultados=@mysql_num_rows($resVerifica) or die(mysql_error());
 			if($resultados !=0){
 				$rowVerifica=mysql_fetch_array($resVerifica);
 				$id_usuario=$rowVerifica['ID'];
